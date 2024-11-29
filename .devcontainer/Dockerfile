@@ -34,7 +34,8 @@ RUN apt-get update && apt-get upgrade -y && \
     cmake \
     libncurses5-dev \
     libncursesw5-dev \
-    nasm && \
+    nasm \
+    gnat-5 && \
     apt-get clean
 
 # Instale o cbfstool (se necessário)
