@@ -1,52 +1,26 @@
-# Use a imagem base do Ubuntu 16.04
-FROM ubuntu:16.04
+# Use uma imagem base com Ubuntu
+FROM ubuntu:20.04
 
-# Defina o diretório de trabalho
-WORKDIR /workspace
-
-# Instale as dependências necessárias
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y \
-    curl \
-    git \
+# Instalar dependências do Coreboot
+RUN apt-get update && apt-get install -y \
     build-essential \
+    git \
+    g++ \
     python3 \
-    bison \
-    flex \
+    python3-pip \
+    python3-setuptools \
     libncurses5-dev \
-    wget \
-    zlib1g-dev \
-    gawk \
     libssl-dev \
-    gcc-multilib \
-    g++-multilib \
-    doxygen \
-    iasl \
     uuid-dev \
-    liblzma-dev \
-    libpci-dev \
-    clang \
-    bc \
-    libtool \
-    autoconf \
-    automake \
-    make \
-    cmake \
-    libncursesw5-dev \
-    libgmp-dev \
-    libmpfr-dev \
-    libmpc-dev \
-    nasm \
-    gnat-5 && \
-    apt-get clean
+    iasl \
+    xz-utils \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instale o cbfstool (se necessário)
-RUN git clone https://review.coreboot.org/coreboot.git /workspace/coreboot && \
-    cd /workspace/coreboot/util/cbfstool && \
-    make
+# Definir diretório de trabalho
+WORKDIR /coreboot
 
-# Defina o diretório de trabalho final
-WORKDIR /workspace/coreboot
+# Baixar dependências do Coreboot
+RUN make crossgcc
 
-# Comando padrão (bash ou qualquer outro comando que você prefira)
-CMD ["bash"]
+# Definir o comando para iniciar o ambiente
+CMD ["/bin/bash"]
