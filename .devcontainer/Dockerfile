@@ -32,8 +32,10 @@ RUN apt-get update && apt-get upgrade -y && \
     automake \
     make \
     cmake \
-    libncurses5-dev \
     libncursesw5-dev \
+    libgmp-dev \
+    libmpfr-dev \
+    libmpc-dev \
     nasm \
     gnat-5 && \
     apt-get clean
