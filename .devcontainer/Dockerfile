@@ -32,6 +32,8 @@ RUN apt-get update && apt-get upgrade -y && \
     automake \
     make \
     cmake \
+    libncurses5-dev \
+    libncursesw5-dev \
     nasm && \
     apt-get clean
 
